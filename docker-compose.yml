@@ -1,0 +1,25 @@
+services:
+  app:
+    build: ./app
+    env_file:
+      - .env
+    ports:
+      - 3000:80
+    depends_on:
+      - mysql
+    restart: on-failure
+    volumes:
+      - ./app:/var/www/html
+  mysql:
+    image: mysql:8.0
+    ports:
+      - 3307:3306
+    restart: always
+    environment:
+      MYSQL_DATABASE: dynamic-app
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: root
+    volumes:
+      - mysqldata:/var/lib/mysql
+volumes:
+  mysqldata:
