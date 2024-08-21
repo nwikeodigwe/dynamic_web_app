@@ -8,11 +8,9 @@
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Dashboard</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Reports</a>
+              <a href="/" class="<?php echo  is_url("/") ? 'bg-gray-900 text-white': 'hover:bg-gray-700 text-gray-300 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
+              <a href="/about" class="<?php echo  is_url("/about") ? 'bg-gray-900 text-white': 'hover:bg-gray-700 text-gray-300 hover:text-white hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium">About</a>
+              <a href="/contact" class="<?php echo  is_url("/contact") ? 'bg-gray-900 text-white': 'hover:bg-gray-700 text-gray-300 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium ">Contact</a>
             </div>
           </div>
         </div>
