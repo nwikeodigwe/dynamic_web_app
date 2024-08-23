@@ -1,16 +1,16 @@
 <?php
-use Core\Database;
-$config = require base_path("config.php");
+use Core\App;
 
-$db = new Database($config['database']);
+$db = App::container()->resolve('Core\Database');
 
 $query = "select * from notes where id = :id";
-
-$note = $db->query($query, [":id" => $_GET['id']])->findOrFail();
+$note = $db->query($query, [
+    ':id' => $_GET['id']
+])->findOrFail();
 
 authorize($note['user_id'] === 1);
 
-view("notes/show.view.php", [
-    "heading" => "Note",
-    "note" => $note
-]);
+$query = "delete from notes where id = :id";
+$db->query($query, [":id" => $_GET['id']]);
+
+header('location: /notes');
