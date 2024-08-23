@@ -1,7 +1,8 @@
 <?php
+use Core\Database;
 use Core\App;
 
-$db = App::container()->resolve('Core\Database');
+$db = App::resolve(Database::class);
 
 $query = "select * from notes where id = :id";
 $note = $db->query($query, [
