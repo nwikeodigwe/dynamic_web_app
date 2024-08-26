@@ -19,7 +19,7 @@ class Middleware {
             return;
         }
 
-        $middleware = self::MAP[$key];
+        $middleware = self::MAP[$key] ?? false;
 
         if(!$middleware){
             throw new \Exception("No matching middleware found for $key");

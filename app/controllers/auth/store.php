@@ -31,7 +31,7 @@ if($user){
     header('location: /auth/login');
     exit();
 }else {
-    $db->query("INSERT into users(email, password) VALUES(:email, :password)", [':email' => $email, ':password' => $password]);
+    $db->query("INSERT into users(email, password) VALUES(:email, :password)", [':email' => $email, ':password' => password_hash($password, PASSWORD_BCRYPT)]);
 
     $_SESSION['logged_in'] = true;
     $_SESSION['user'] = [
