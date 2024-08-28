@@ -1,0 +1,26 @@
+{
+  "name": "nwike/dynamic_web_app",
+  "authors": [
+    {
+      "name": "Nwike Odigwe",
+      "email": "nwikeodigwe@outlook.com"
+    }
+  ],
+  "require": {
+    "illuminate/collections": "^11.21"
+  },
+  "autoload": {
+    "psr-4": {
+      "Core\\": "Core/",
+      "Http\\": "Http/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "require-dev": {
+    "pestphp/pest": "^2.35"
+  }
+}

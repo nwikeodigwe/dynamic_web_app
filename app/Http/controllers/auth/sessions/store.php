@@ -2,7 +2,6 @@
 use Core\Authenticator;
 use Http\Forms\LoginForms;
 
-
 $attributes = [
     'email' => $_POST['email'],
     'password' => $_POST['password'],
@@ -19,5 +18,3 @@ if(!$signed_in){
 
 $auth->login();
 redirect('/');
-
-

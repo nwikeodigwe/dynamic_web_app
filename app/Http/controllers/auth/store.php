@@ -4,7 +4,6 @@ use Http\Forms\LoginForms;
 use Core\App;
 use Core\Database;
 
-
 $db = App::resolve(Database::class);
 
 $attributes = [
@@ -24,5 +23,3 @@ $auth->register();
 $auth->attempt();
 $auth->login();
 redirect('/');
-
-
