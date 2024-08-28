@@ -28,13 +28,18 @@ class Router {
     public function route($uri, $method){
         foreach($this->routes as $route){
             if($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
-                
+
                 (new Middleware)->resolve($route['middleware']);
-                return require base_path($route['controller']);
+                return require base_path('Http/controllers/'.$route['controller']);
             }
         }
         $this->abort();
     }
+
+    public function previous_url(){
+        return $_SERVER['HTTP_REFERER'];
+    }
+    
     public function only($key){
         return $this->routes[array_key_last($this->routes)]['middleware'] = $key;
         

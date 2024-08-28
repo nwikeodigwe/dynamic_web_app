@@ -11,7 +11,9 @@
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a href="/" class="<?php echo  is_url("/") ? 'bg-gray-900 text-white': 'hover:bg-gray-700 text-gray-300 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
               <a href="/about" class="<?php echo  is_url("/about") ? 'bg-gray-900 text-white': 'hover:bg-gray-700 text-gray-300 hover:text-white hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium">About</a>
-              <a href="/notes" class="<?php echo  is_url("/notes") ? 'bg-gray-900 text-white': 'hover:bg-gray-700 text-gray-300 hover:text-white hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium">Notes</a>
+              <?php if($_SESSION['logged_in'] ?? false): ?>
+                <a href="/notes" class="<?php echo  is_url("/notes") ? 'bg-gray-900 text-white': 'hover:bg-gray-700 text-gray-300 hover:text-white hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium">Notes</a>
+              <?php endif ?>
               <a href="/contact" class="<?php echo  is_url("/contact") ? 'bg-gray-900 text-white': 'hover:bg-gray-700 text-gray-300 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium ">Contact</a>
             </div>
           </div>
@@ -27,15 +29,22 @@
             </button>
 
             <!-- Profile dropdown -->
-            <div class="relative ml-3">
+            <div class="relative flex gap-x-3 ml-3">
     <?php if ($_SESSION['logged_in'] ?? false): ?>
         <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
             <span class="absolute -inset-1.5"></span>
             <span class="sr-only">Open user menu</span>
             <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
         </button>
+        <div>
+          <form method="POST" action="/auth/logout">
+            <input type="hidden" name="__request_method" value="DELETE">
+            <button class="text-white hover:text-gray-200 transition duration-100 text-sm font-medium">Logout</button>
+          </form>
+        </div>
     <?php else: ?>
-        <p class="text-white font-medium hover:underline"><a href="/auth/register">Register</a></p>
+        <a href="/auth/login" class="<?php echo  is_url("/auth/login") ? 'bg-gray-900 text-white': 'hover:bg-gray-700 text-gray-300 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium text-white" aria-current="page">Login</a>
+        <a href="/auth/register" class="<?php echo  is_url("/auth/register") ? 'bg-gray-900 text-white': 'hover:bg-gray-700 text-gray-300 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium text-white" aria-current="page">Register</a>
     <?php endif; ?>
 </div>
 

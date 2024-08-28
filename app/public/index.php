@@ -2,6 +2,9 @@
 session_start();
 
 use Core\Router;
+use Core\Session;
+use Core\ValidationException;
+
 const BASE_PATH = __DIR__ . "/../";
 
 require BASE_PATH . "Core/functions.php";
@@ -20,7 +23,15 @@ $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 $method = $_POST['__request_method'] ?? $_SERVER['REQUEST_METHOD'];
 
-$router->route($uri, $method);
+
+try {
+    $router->route($uri, $method);
+}catch(ValidationException $exception){
+    Session::flash('errors', $exception->errors);
+    Session::flash('old', ['email' => $exception->old['email']]);
+    redirect($router->previous_url());
+}
+Session::unflash();
 
 
 

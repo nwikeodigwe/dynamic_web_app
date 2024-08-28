@@ -1,20 +1,25 @@
 <?php
 use Core\Middleware\Middleware;
 
-$router->get('/', 'controllers/index.php');
-$router->get('/about', 'controllers/about.php');
-$router->get('/contact', 'controllers/contact.php');
+$router->get('/', 'index.php');
+$router->get('/about', 'about.php');
+$router->get('/contact', 'contact.php');
 
-$router->get('/note', 'controllers/notes/show.php');
-$router->delete('/note', 'controllers/notes/destroy.php');
+$router->get('/note', 'notes/show.php');
+$router->delete('/note', 'notes/destroy.php');
 
-$router->get('/notes', 'controllers/notes/index.php')->only(Middleware::GUEST);
-$router->post('/notes', 'controllers/notes/store.php');
+$router->get('/notes', 'notes/index.php')->only(Middleware::USER);
+$router->post('/notes', 'notes/store.php');
 
-$router->get('/note/create', 'controllers/notes/create.php');
-$router->get('/note/edit', 'controllers/notes/edit.php');
-$router->patch('/note', 'controllers/notes/update.php');
+$router->get('/note/create', 'notes/create.php');
+$router->get('/note/edit', 'notes/edit.php');
+$router->patch('/note', 'notes/update.php');
 
-$router->get('/auth/register', 'controllers/auth/create.php')->only(Middleware::USER);
-$router->post('/auth/register', 'controllers/auth/store.php');
+$router->get('/auth/register', 'auth/create.php')->only(Middleware::GUEST);
+$router->post('/auth/register', 'auth/store.php');
+
+$router->get('/auth/login', 'auth/sessions/create.php')->only(Middleware::GUEST);
+$router->post('/auth/login', 'auth/sessions/store.php')->only(Middleware::GUEST);
+
+$router->delete('/auth/logout', 'auth/sessions/destroy.php')->only(Middleware::USER);
 
